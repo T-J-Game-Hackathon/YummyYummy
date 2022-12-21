@@ -45,7 +45,11 @@ public class Player : MonoBehaviour
         {
             animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
         }
-        else
+    }
+
+    public void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Crop"))
         {
             animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), false);
         }
