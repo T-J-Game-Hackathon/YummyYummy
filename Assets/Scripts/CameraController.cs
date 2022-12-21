@@ -1,13 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    [SerializeField] private float radius;
-    [SerializeField] private float height;
-    [SerializeField] public float speed;
-    [SerializeField] public GameObject TargetObject;
+    [SerializeField]
+    private float radius;
+
+    [SerializeField]
+    private float height;
+
+    [SerializeField]
+    public float speed;
+
+    [SerializeField]
+    public GameObject TargetObject;
 
     void Start()
     {
