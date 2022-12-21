@@ -15,7 +15,7 @@ public class Player : MonoBehaviour
     private Rigidbody rb;
 
     [SerializeField]
-    private Crop holdingCrop;
+    public Crop holdingCrop;
 
     public void Start()
     {
@@ -67,9 +67,20 @@ public class Player : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Crop"))
+        var obj = other.gameObject;
+        if (obj.CompareTag("Crop"))
         {
-            animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
+            var arableLand = obj.GetComponent<ArableLand>();
+            if (arableLand.isHarvestable)
+            {
+                arableLand.Harvest();
+                animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
+            }
+            else if (!arableLand.hasPlanted)
+            {
+                arableLand.Plant(holdingCrop);
+                animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
+            }
         }
     }
 

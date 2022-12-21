@@ -19,7 +19,7 @@ public class ArableLand : MonoBehaviour
 
     //   植物が植えられているかのboolean
     [SerializeField]
-    private bool hasPlanted = false;
+    public bool hasPlanted = false;
 
     // 植えられた時間
     // private DateTime plantedTime = DateTime.MinValue;
@@ -38,7 +38,7 @@ public class ArableLand : MonoBehaviour
     // 成長の処理
     // 収穫可能かどうか
     [SerializeField]
-    private bool isHarvestable = false;
+    public bool isHarvestable = false;
 
     // Start is called before the first frame update
     void Start()
