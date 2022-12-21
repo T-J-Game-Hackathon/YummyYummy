@@ -94,4 +94,28 @@ public class ArableLand : MonoBehaviour
             spriteObject.SetActive(false);
         }
     }
+
+    public void Plant(Crop crop)
+    {
+        plantedCrop = crop;
+        hasPlanted = true;
+        isHarvestable = false;
+        elapsedGrowTime = 0.0f;
+    }
+
+    public void Harvest()
+    {
+        if (isHarvestable)
+        {
+            // Find game object with tag named "GameController"
+            GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+            // Get component of the game object
+            GameManager gameManager = gameControllerObject.GetComponent<GameManager>();
+            // Add money
+            gameManager.IncrementMoney(plantedCrop);
+
+            hasPlanted = false;
+            isHarvestable = false;
+        }
+    }
 }
