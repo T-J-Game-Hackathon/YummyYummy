@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    private static int Score;
+    public static int Score;
     public static int Money;
+
     private static float TimeLimit; //Second
     private static float RateOfFull;
     private static float ElapsedTime;
@@ -13,10 +15,18 @@ public class GameManager : MonoBehaviour
     [SerializeField]private GameObject MenuUIPrefab;
     private GameObject MenuUIInstance;
 
+    [SerializeField] private GameObject ScoreText;
+    private GameObject ScoreUIInstance;
+
     // Start is called before the first frame update
+    void Awake()
+    {
+        ScoreUIInstance = GameObject.Instantiate(ScoreText) as GameObject;
+    }
+
     void Start()
     {
-        Score = 0;
+        Score = 12345;
         Money = 0;
         TimeLimit = 180.0f; //Default: 3 min
         RateOfFull = 0;
@@ -56,5 +66,6 @@ public class GameManager : MonoBehaviour
             return;
         }
         Debug.Log("LIMIT: " + (int)(TimeLimit - Time.time) + " seconds");
+        ScoreText.GetComponent<Text>().text = Score.ToString();
     }
 }
