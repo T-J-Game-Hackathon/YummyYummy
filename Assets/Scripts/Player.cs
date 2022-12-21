@@ -45,5 +45,9 @@ public class Player : MonoBehaviour
         {
             animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
         }
+        else
+        {
+            animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), false);
+        }
     }
 }

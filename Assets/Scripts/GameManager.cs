@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -10,39 +8,41 @@ public class GameManager : MonoBehaviour
     private static float RateOfFull;
     private static float ElapsedTime;
 
-    [SerializeField]private GameObject MenuUIPrefab;
+    [SerializeField]
+    private GameObject MenuUIPrefab;
     private GameObject MenuUIInstance;
 
-    // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         Score = 0;
         Money = 0;
-        TimeLimit = 180.0f; //Default: 3 min
+        TimeLimit = 180.0f;
         RateOfFull = 0;
         ElapsedTime = 0;
     }
 
-    void TimeSwtiching(int mode)
+    public void TimeSwtiching(int mode)
     {
         switch (mode)
         {
             case 1:
-                TimeLimit = 180;    break;
+                TimeLimit = 180;
+                break;
             case 2:
-                TimeLimit = 300;    break;
-            default:    break;
+                TimeLimit = 300;
+                break;
+            default:
+                break;
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (MenuUIInstance == null)
             {
-                MenuUIInstance = GameObject.Instantiate(MenuUIPrefab) as GameObject;
+                MenuUIInstance = Instantiate(MenuUIPrefab);
                 Time.timeScale = 0f;
             }
             else
@@ -51,10 +51,9 @@ public class GameManager : MonoBehaviour
                 Time.timeScale = 1f;
             }
         }
-        if(Mathf.Approximately(Time.timeScale, 0f))
+        if (Mathf.Approximately(Time.timeScale, 0f))
         {
             return;
         }
-        // Debug.Log("LIMIT: " + (int)(TimeLimit - Time.time) + " seconds");
     }
 }
