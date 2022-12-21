@@ -2,16 +2,42 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
     public float speed = 150f;
+
+    [SerializeField]
     public float turnSpeed = 10f;
 
+    [SerializeField]
     private Animator animator;
+
+    [SerializeField]
     private Rigidbody rb;
+
+    [SerializeField]
+    private Crop holdingCrop;
 
     public void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        holdingCrop = Crop.Potato;
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            holdingCrop = Crop.Potato;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            holdingCrop = Crop.Spinach;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            holdingCrop = Crop.Tomato;
+        }
     }
 
     public void FixedUpdate()
