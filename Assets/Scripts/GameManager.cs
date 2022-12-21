@@ -55,6 +55,6 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
-        Debug.Log("LIMIT: " + (int)(TimeLimit - Time.time) + " seconds");
+        // Debug.Log("LIMIT: " + (int)(TimeLimit - Time.time) + " seconds");
     }
 }
