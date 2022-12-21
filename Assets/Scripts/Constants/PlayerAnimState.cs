@@ -1,4 +1,4 @@
-enum PlayerAnimState
+public enum PlayerAnimState
 {
     isIdle,
     isRun,
