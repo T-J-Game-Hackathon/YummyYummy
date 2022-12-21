@@ -2,16 +2,42 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField]
     public float speed = 150f;
+
+    [SerializeField]
     public float turnSpeed = 10f;
 
+    [SerializeField]
     private Animator animator;
+
+    [SerializeField]
     private Rigidbody rb;
+
+    [SerializeField]
+    public Crop holdingCrop;
 
     public void Start()
     {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        holdingCrop = Crop.Potato;
+    }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            holdingCrop = Crop.Potato;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            holdingCrop = Crop.Spinach;
+        }
+        else if (Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            holdingCrop = Crop.Tomato;
+        }
     }
 
     public void FixedUpdate()
@@ -41,9 +67,20 @@ public class Player : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Crop"))
+        var obj = other.gameObject;
+        if (obj.CompareTag("Crop"))
         {
-            animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
+            var arableLand = obj.GetComponent<ArableLand>();
+            if (arableLand.isHarvestable)
+            {
+                arableLand.Harvest();
+                animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
+            }
+            else if (!arableLand.hasPlanted)
+            {
+                arableLand.Plant(holdingCrop);
+                animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
+            }
         }
     }
 
