@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float speed = 10f;
+    public float speed = 150f;
     public float turnSpeed = 10f;
 
     private Animator animator;
@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
             rb.angularVelocity = Vector3.zero;
 
             animator.SetBool(PlayerAnimState.isRun.ToString(), false);
+            Debug.Log("isIdle");
         }
         else
         {
@@ -36,6 +37,7 @@ public class Player : MonoBehaviour
             transform.rotation = Quaternion.RotateTowards(curr_quat, dest_quat, turnSpeed);
 
             animator.SetBool(PlayerAnimState.isRun.ToString(), true);
+            Debug.Log("isRun");
         }
     }
 
