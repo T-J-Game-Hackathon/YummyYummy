@@ -74,7 +74,3 @@ crashlytics-build.properties
 # SDF asset file for Unity TextMeshPro
 /[Aa]ssets/[Ff]onts/*/*.asset
 /[Aa]ssets/[Ff]onts/*/*.asset.meta
-
-# ストア由来のアセット
-/[Aa]ssets/RPG\ Tiny\ Hero\ Duo
-/[Aa]ssets/Wispy\ Sky
