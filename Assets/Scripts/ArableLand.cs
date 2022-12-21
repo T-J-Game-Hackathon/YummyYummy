@@ -3,13 +3,6 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
-public enum Crop
-{
-    Potato,
-    Spinach, // ほうれん草
-    Tomato
-}
-
 public class ArableLand : MonoBehaviour
 {
     [SerializeField]
