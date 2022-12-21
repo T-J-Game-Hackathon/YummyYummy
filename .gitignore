@@ -75,7 +75,10 @@ crashlytics-build.properties
 /[Aa]ssets/[Ff]onts/*/*.asset
 /[Aa]ssets/[Ff]onts/*/*.asset.meta
 
+*.DS_Store
+
 # ストア由来のアセット
 /[Aa]ssets/RPG\ Tiny\ Hero\ Duo
+/[Aa]ssets/RPG\ Tiny\ Hero\ Duo.meta
 /[Aa]ssets/Wispy\ Sky
 /[Aa]ssets/Wispy\ Sky.meta
