@@ -24,13 +24,20 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public int SupportMoney = 2000;
 
+    public GameObject InGameUICanvasObject;
+    private InGameUI InGameUIInstance;
+
     public void Start()
     {
         Score = 0;
         Money = 0;
-        TimeLimit = 180.0f;
+        // TimeLimit = 180.0f;
+        TimeLimit = 70.0f;
+
         RateOfFull = 0;
         ElapsedTime = 0;
+        // 常時表示UIのCanvasについているインスタンス`InGameUI`を取得
+        InGameUIInstance = InGameUICanvasObject.GetComponent<InGameUI>();
     }
 
     public void TimeSwtiching(int mode)
@@ -72,6 +79,7 @@ public class GameManager : MonoBehaviour
     public void FixedUpdate()
     {
         ElapsedTime += Time.fixedDeltaTime;
+        UpdateRemainingTimeUI();
         if (ElapsedTime >= TimeLimit)
         {
             // Game Over
@@ -80,6 +88,7 @@ public class GameManager : MonoBehaviour
 
     public void IncrementScore(Crop crop)
     {
+        Debug.Log("IncrementScore has called!");
         switch (crop)
         {
             case Crop.Potato:
@@ -94,10 +103,18 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+
+        if (InGameUIInstance != null)
+        {
+            InGameUIInstance.UpdateScoreUI(Score);
+            UpdateSatisfactionUI();
+        }
     }
 
     public void IncrementMoney(Crop crop)
     {
+        Debug.Log("IncrementMoney has called!");
+
         switch (crop)
         {
             case Crop.Potato:
@@ -111,6 +128,33 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 break;
+        }
+        if (InGameUIInstance != null)
+        {
+            InGameUIInstance.UpdateMoneyUI(Money);
+        }
+    }
+
+    void UpdateSatisfactionUI()
+    {
+        float targetScore = 5000;
+        RateOfFull = Score / targetScore;
+        if (InGameUIInstance != null)
+        {
+            InGameUIInstance.UpdateSatisfactionUI(RateOfFull);
+        }
+    }
+
+    private float getRemainingTime()
+    {
+        return TimeLimit - ElapsedTime;
+    }
+
+    void UpdateRemainingTimeUI()
+    {
+        if (InGameUIInstance != null)
+        {
+            InGameUIInstance.UpdateRemainingTimeUI(Mathf.Max(0, getRemainingTime()));
         }
     }
 
