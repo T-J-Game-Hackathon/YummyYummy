@@ -167,11 +167,11 @@ public class ArableLand : MonoBehaviour
         {
             return GrowPhase.Phase0;
         }
-        if (elapsedGrowTime < growTime / 3)
+        if (elapsedGrowTime < growTime / 2)
         {
             return GrowPhase.Phase1;
         }
-        if (elapsedGrowTime < growTime * 2 / 3)
+        if (elapsedGrowTime < growTime)
         {
             return GrowPhase.Phase2;
         }
