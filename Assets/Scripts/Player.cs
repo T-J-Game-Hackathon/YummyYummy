@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public GameObject inGameUIObject;
+
     [SerializeField]
     public float speed = 150f;
 
@@ -34,15 +36,15 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            holdingCrop = Crop.Potato;
+            SetHoldingCrop(Crop.Potato);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            holdingCrop = Crop.Spinach;
+            SetHoldingCrop(Crop.Spinach);
         }
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            holdingCrop = Crop.Tomato;
+            SetHoldingCrop(Crop.Tomato);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
@@ -50,6 +52,12 @@ public class Player : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             canJump = false;
         }
+    }
+
+    private void SetHoldingCrop(Crop crop)
+    {
+        holdingCrop = crop;
+        inGameUIObject.GetComponent<InGameUI>().UpdateHoldingCropSprite(crop);
     }
 
     public void FixedUpdate()
