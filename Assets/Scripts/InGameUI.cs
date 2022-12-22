@@ -21,8 +21,8 @@ public class InGameUI : MonoBehaviour
     {
         UpdateScoreUI(0);
         UpdateMoneyUI(0);
-        UpdateRemainingTimeUI(70);
-        UpdateSatisfactionUI(0.5f);
+        UpdateRemainingTimeUI(0);
+        UpdateSatisfactionUI(0);
     }
 
     // Update is called once per frame
@@ -42,7 +42,7 @@ public class InGameUI : MonoBehaviour
     {
         int flooredRemainingTime = Mathf.FloorToInt(remainingTime);
         remainingTimeLabel.GetComponent<TMPro.TMP_Text>().text =
-            (flooredRemainingTime / 60).ToString() + ":" + (flooredRemainingTime % 60).ToString();
+            (flooredRemainingTime / 60).ToString() + ":" + (flooredRemainingTime % 60).ToString("00");
     }
 
     public void UpdateSatisfactionUI(float satisfaction) // 0 to 1
