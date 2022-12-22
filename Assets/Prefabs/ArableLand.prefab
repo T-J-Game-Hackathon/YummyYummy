@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e5600378dd761e64d9423790c482bf36, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f0b726697e46d477482dbbe5acf54020, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -131,9 +131,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteObject: {fileID: 7066861150845470022}
-  potatoSprite: {fileID: 21300000, guid: 3a0c527d7f890d64a9b56b086e6e766a, type: 3}
-  spinachSprite: {fileID: 21300000, guid: 70632ddfe8e71b04b8f90ef7e29a9e98, type: 3}
-  tomatoSprite: {fileID: 21300000, guid: c887ed2a931c29040bc544cd8c546e9f, type: 3}
+  phase1Sprite: {fileID: 21300000, guid: f0b726697e46d477482dbbe5acf54020, type: 3}
+  phase2PotatoSprite: {fileID: 21300000, guid: 6713eed18682e4066bff4fd70a5476c0, type: 3}
+  phase3PotatoSprite: {fileID: 21300000, guid: 987f4ccb276724762873abaa63214def, type: 3}
+  phase2SpinachSprite: {fileID: 21300000, guid: 0c4ddd3380bb145c084af82f4e94e7f3, type: 3}
+  phase3SpinachSprite: {fileID: 21300000, guid: f1e70c168ed65458da94723eb4820f38, type: 3}
+  phase2TomatoSprite: {fileID: 21300000, guid: f302f8fc088604946a228fa0441c8072, type: 3}
+  phase3TomatoSprite: {fileID: 21300000, guid: e360a3ad7dd40488898dba073943fa98, type: 3}
   hasPlanted: 1
   elapsedGrowTime: 0
   growTime: 10
@@ -147,7 +151,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7066861150861058063}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.7

@@ -3,19 +3,39 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 
+enum GrowPhase
+{
+    Phase0, // 未使用(植えられていない)
+    Phase1,
+    Phase2,
+    Phase3 // 収穫可能
+}
+
 public class ArableLand : MonoBehaviour
 {
     [SerializeField]
     private GameObject spriteObject;
 
     [SerializeField]
-    private Sprite potatoSprite;
+    private Sprite phase1Sprite;
 
     [SerializeField]
-    private Sprite spinachSprite;
+    private Sprite phase2PotatoSprite;
 
     [SerializeField]
-    private Sprite tomatoSprite;
+    private Sprite phase3PotatoSprite;
+
+    [SerializeField]
+    private Sprite phase2SpinachSprite;
+
+    [SerializeField]
+    private Sprite phase3SpinachSprite;
+
+    [SerializeField]
+    private Sprite phase2TomatoSprite;
+
+    [SerializeField]
+    private Sprite phase3TomatoSprite;
 
     //   植物が植えられているかのboolean
     [SerializeField]
@@ -75,16 +95,38 @@ public class ArableLand : MonoBehaviour
         {
             spriteObject.SetActive(true);
             // 成長が完了している場合
-            switch (plantedCrop)
+            switch (getGrowPhase())
             {
-                case Crop.Potato:
-                    spriteObject.GetComponent<SpriteRenderer>().sprite = potatoSprite;
+                case GrowPhase.Phase1:
+                    spriteObject.GetComponent<SpriteRenderer>().sprite = phase1Sprite;
                     break;
-                case Crop.Spinach:
-                    spriteObject.GetComponent<SpriteRenderer>().sprite = spinachSprite;
+                case GrowPhase.Phase2:
+                    switch (plantedCrop)
+                    {
+                        case Crop.Potato:
+                            spriteObject.GetComponent<SpriteRenderer>().sprite = phase2PotatoSprite;
+                            break;
+                        case Crop.Spinach:
+                            spriteObject.GetComponent<SpriteRenderer>().sprite = phase2SpinachSprite;
+                            break;
+                        case Crop.Tomato:
+                            spriteObject.GetComponent<SpriteRenderer>().sprite = phase2TomatoSprite;
+                            break;
+                    }
                     break;
-                case Crop.Tomato:
-                    spriteObject.GetComponent<SpriteRenderer>().sprite = tomatoSprite;
+                case GrowPhase.Phase3:
+                    switch (plantedCrop)
+                    {
+                        case Crop.Potato:
+                            spriteObject.GetComponent<SpriteRenderer>().sprite = phase3PotatoSprite;
+                            break;
+                        case Crop.Spinach:
+                            spriteObject.GetComponent<SpriteRenderer>().sprite = phase3SpinachSprite;
+                            break;
+                        case Crop.Tomato:
+                            spriteObject.GetComponent<SpriteRenderer>().sprite = phase3TomatoSprite;
+                            break;
+                    }
                     break;
             }
         }
@@ -117,5 +159,22 @@ public class ArableLand : MonoBehaviour
             hasPlanted = false;
             isHarvestable = false;
         }
+    }
+
+    private GrowPhase getGrowPhase()
+    {
+        if (!hasPlanted)
+        {
+            return GrowPhase.Phase0;
+        }
+        if (elapsedGrowTime < growTime / 3)
+        {
+            return GrowPhase.Phase1;
+        }
+        if (elapsedGrowTime < growTime * 2 / 3)
+        {
+            return GrowPhase.Phase2;
+        }
+        return GrowPhase.Phase3;
     }
 }
