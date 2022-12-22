@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +16,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public GameObject MenuUIPrefab;
     private GameObject MenuUIInstance;
+    private string SceneName;
 
     [SerializeField]
     public static float GetSupportCoolTime = 5.0f;
@@ -27,17 +30,24 @@ public class GameManager : MonoBehaviour
     public GameObject InGameUICanvasObject;
     private InGameUI InGameUIInstance;
 
+    [SerializeField] private GameObject TimeUpPrefab;
+    private GameObject TimeUp;
+
     public void Start()
     {
+        SceneName = SceneManager.GetActiveScene().name;
         Score = 0;
         Money = 0;
         // TimeLimit = 180.0f;
-        TimeLimit = 70.0f;
+        TimeLimit = 20.0f;
 
         RateOfFull = 0;
         ElapsedTime = 0;
 
         // 常時表示UIのCanvasについているインスタンス`InGameUI`を取得
+        if(Equals(SceneName,"Result")){
+            return;
+        }
         InGameUIInstance = InGameUICanvasObject.GetComponent<InGameUI>();
 
         DontDestroyOnLoad(gameObject);
@@ -60,6 +70,9 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        if(Equals(SceneName,"Result")){
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (MenuUIInstance == null)
@@ -81,12 +94,22 @@ public class GameManager : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if(Equals(SceneName,"Result")){
+            return;
+        }
         ElapsedTime += Time.fixedDeltaTime;
         UpdateRemainingTimeUI();
-        if (ElapsedTime >= TimeLimit)
-        {
-            // Game Over
+        if ((ElapsedTime >= TimeLimit))
+        {   
+            if(TimeUp == null){
+                TimeUp = Instantiate(TimeUpPrefab);
+                StartCoroutine(Wait());
+            }
         }
+    }
+    IEnumerator Wait(){
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Result");
     }
 
     public void IncrementScore(Crop crop)
@@ -189,5 +212,15 @@ public class GameManager : MonoBehaviour
     public bool CanGiveSupport()
     {
         return Money >= SupportMoney;
+    }
+
+    public float Show(string name){
+        switch(name){
+            case "Score":
+                return (float)Score;
+            case "Full":
+                return RateOfFull;
+            default: return 0f;
+        }
     }
 }

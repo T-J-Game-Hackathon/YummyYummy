@@ -20,12 +20,10 @@ public class CameraController : MonoBehaviour
 
         Vector3 pos = Camera.position;
         pos.x = TargetObject.transform.position.x;
+        pos.y = TargetObject.transform.position.y + height;
         pos.z = TargetObject.transform.position.z - radius;
-        Vector3 rad = Camera.eulerAngles;
-        rad.x = Mathf.Atan(height / radius);
-        rad.y = 0f;
-        rad.z = 0f;
-        Camera.eulerAngles = rad;
+
+        transform.position = pos;
     }
 
     void Update()
