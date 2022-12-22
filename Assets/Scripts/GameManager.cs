@@ -3,16 +3,16 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private static int Score;
+    public static int Score;
 
     [SerializeField]
-    private static int Money;
+    public static int Money;
     private static float TimeLimit; //Second
-    private static float RateOfFull;
+    public static float RateOfFull;
     private static float ElapsedTime;
 
     [SerializeField]
-    private GameObject MenuUIPrefab;
+    public GameObject MenuUIPrefab;
     private GameObject MenuUIInstance;
 
     [SerializeField]
@@ -31,6 +31,8 @@ public class GameManager : MonoBehaviour
         TimeLimit = 180.0f;
         RateOfFull = 0;
         ElapsedTime = 0;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void TimeSwtiching(int mode)
