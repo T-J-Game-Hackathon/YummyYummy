@@ -93,8 +93,15 @@ public class Player : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
+        var obj = other.gameObject;
+
         if (other.gameObject.CompareTag("Crop"))
         {
+            var arableLand = obj.GetComponent<ArableLand>();
+            if (!arableLand.hasPlanted)
+            {
+                arableLand.Plant(holdingCrop);
+            }
             animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), false);
         }
     }
