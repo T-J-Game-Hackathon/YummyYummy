@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class InGameUI : MonoBehaviour
 {
+    public GameObject shopCanvasObject;
     public GameObject holdingCropSpriteObject;
     public GameObject ItemSpriteObject;
 
@@ -48,7 +49,7 @@ public class InGameUI : MonoBehaviour
             // Shopを開く
             OnShopOpened();
         }
-        UpdateItemSprite(Player.item);
+        UpdateItemSprite(Player.GetItem());
     }
 
     public void UpdateScoreUI(int score)
@@ -120,5 +121,6 @@ public class InGameUI : MonoBehaviour
     public void OnShopOpened()
     {
         Debug.Log("Shop opened! or at least it should have.");
+        shopCanvasObject.SetActive(true);
     }
 }

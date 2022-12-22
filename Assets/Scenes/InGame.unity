@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18288884, g: 0.22858581, b: 0.30692092, a: 1}
+  m_IndirectSpecularColor: {r: 0.18288901, g: 0.22858608, b: 0.3069214, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1805,7 +1805,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -512.32, y: -26.787}
+  m_AnchoredPosition: {x: -512.32, y: -26.787003}
   m_SizeDelta: {x: 70.2027, y: 71.8534}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &711947904
@@ -2954,6 +2954,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2741197971898735825, guid: 57ffa0b957fc27b42b1cbb052c0fa2a1, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 2741197971898735825, guid: 57ffa0b957fc27b42b1cbb052c0fa2a1, type: 3}
+      propertyPath: m_RenderMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2741197971898735825, guid: 57ffa0b957fc27b42b1cbb052c0fa2a1, type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2741197971898735826, guid: 57ffa0b957fc27b42b1cbb052c0fa2a1, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -4664,7 +4676,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1882950715
 PrefabInstance:
@@ -4913,6 +4925,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7066861150861058057, guid: 59828ead6a73a42938c00918c4f1b54e, type: 3}
   m_PrefabInstance: {fileID: 1320809147}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1961662996 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2741197971898735830, guid: 57ffa0b957fc27b42b1cbb052c0fa2a1, type: 3}
+  m_PrefabInstance: {fileID: 1021847108}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1975084474 stripped
 Transform:
@@ -9053,6 +9070,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cdfdda0c96b4cd29c95e30837981b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shopCanvasObject: {fileID: 1961662996}
   holdingCropSpriteObject: {fileID: 622669170}
   ItemSpriteObject: {fileID: 839506502}
   scoreLabel: {fileID: 884328674}
