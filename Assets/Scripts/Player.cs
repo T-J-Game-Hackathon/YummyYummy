@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     public float jumpForce = 6.5f;
 
+    [SerializeField]
+    public Item item = Item.None;
+
     private Animator animator;
     private Rigidbody rb;
     private bool canJump = true;
@@ -80,11 +83,13 @@ public class Player : MonoBehaviour
             var arableLand = obj.GetComponent<ArableLand>();
             if (arableLand.isHarvestable)
             {
+                ExpandColider();
                 arableLand.Harvest();
                 animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
             }
-            else if (!arableLand.hasPlanted)
+            if (!arableLand.hasPlanted)
             {
+                ExpandColider();
                 arableLand.Plant(holdingCrop);
                 animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
             }
@@ -93,15 +98,10 @@ public class Player : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        var obj = other.gameObject;
-
         if (other.gameObject.CompareTag("Crop"))
         {
-            var arableLand = obj.GetComponent<ArableLand>();
-            if (!arableLand.hasPlanted)
-            {
-                arableLand.Plant(holdingCrop);
-            }
+            var col = GetComponent<CapsuleCollider>();
+            col.radius = 0.4f;
             animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), false);
         }
     }
@@ -110,8 +110,29 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            // 地面と接触したら、ジャンプできるようにする
             canJump = true;
+        }
+    }
+
+    public void ExpandColider()
+    {
+        var col = GetComponent<CapsuleCollider>();
+        switch (item)
+        {
+            case Item.hoe1:
+                col.radius = 1.0f;
+                break;
+            case Item.hoe2:
+                col.radius = 2.5f;
+                break;
+            case Item.hoe3:
+                col.radius = 4.0f;
+                break;
+            case Item.None:
+                break;
+            default:
+                Debug.Log("Error: Player.cs: ExpandColider(): item is not defined");
+                break;
         }
     }
 }
