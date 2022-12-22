@@ -3,10 +3,8 @@ using System.Collections;
 using TMPro;
 public class InfoDisplayer : MonoBehaviour {
     [SerializeField] private GameObject infomate;
-    private static float ScoreInfo;
-    private static float FullInfo;
-    string ScoreText;
-    string FullText;
+    private static float ScoreInfo, FullInfo;
+    string ScoreText, FullText;
     [SerializeField] private TextMeshProUGUI text;
 	void Start () {
         GetScore();
