@@ -6,8 +6,8 @@ TerrainLayer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Leaf
-  m_DiffuseTexture: {fileID: 2800000, guid: 44ec7a3e14f0b854d8926cad83222db5, type: 3}
+  m_Name: ArableLand
+  m_DiffuseTexture: {fileID: 2800000, guid: f8f4c748a3bd61d4a860b2046960d9c6, type: 3}
   m_NormalMapTexture: {fileID: 0}
   m_MaskMapTexture: {fileID: 0}
   m_TileSize: {x: 2, y: 2}
