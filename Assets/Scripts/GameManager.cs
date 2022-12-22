@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,17 +30,23 @@ public class GameManager : MonoBehaviour
     public GameObject InGameUICanvasObject;
     private InGameUI InGameUIInstance;
 
+    [SerializeField] private GameObject TimeUpPrefab;
+    private GameObject TimeUp;
+
     public void Start()
     {
         SceneName = SceneManager.GetActiveScene().name;
         Score = 0;
         Money = 0;
         // TimeLimit = 180.0f;
-        TimeLimit = 70.0f;
+        TimeLimit = 20.0f;
 
         RateOfFull = 0;
         ElapsedTime = 0;
         // 常時表示UIのCanvasについているインスタンス`InGameUI`を取得
+        if(Equals(SceneName,"Result")){
+            return;
+        }
         InGameUIInstance = InGameUICanvasObject.GetComponent<InGameUI>();
     }
 
@@ -60,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
-        if(Equals(SceneName,"Return")){
+        if(Equals(SceneName,"Result")){
             return;
         }
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -84,12 +91,22 @@ public class GameManager : MonoBehaviour
 
     public void FixedUpdate()
     {
+        if(Equals(SceneName,"Result")){
+            return;
+        }
         ElapsedTime += Time.fixedDeltaTime;
         UpdateRemainingTimeUI();
-        if (ElapsedTime >= TimeLimit)
-        {
-            // Game Over
+        if ((ElapsedTime >= TimeLimit))
+        {   
+            if(TimeUp == null){
+                TimeUp = Instantiate(TimeUpPrefab);
+                StartCoroutine(Wait());
+            }
         }
+    }
+    IEnumerator Wait(){
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Result");
     }
 
     public void IncrementScore(Crop crop)
