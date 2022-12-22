@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     public static float GetSupportCoolTime = 5.0f;
     private float lastUsedTime;
+    public static float ScoreBuff = 1f;
+    public static int SupportCount = 0;
+
+    [SerializeField]
+    public int SupportMoney = 2000;
 
     public void Start()
     {
@@ -96,20 +101,20 @@ public class GameManager : MonoBehaviour
         switch (crop)
         {
             case Crop.Potato:
-                Score += 10;
+                Money += 10;
                 break;
             case Crop.Spinach:
-                Score += 30;
+                Money += 30;
                 break;
             case Crop.Tomato:
-                Score += 50;
+                Money += 50;
                 break;
             default:
                 break;
         }
     }
 
-    public void ReceiveMoney(int money)
+    public void GetSuppport(int money)
     {
         if (!CanGetSupport())
         {
@@ -129,5 +134,22 @@ public class GameManager : MonoBehaviour
     public float RemainingCoolTime()
     {
         return GetSupportCoolTime - (Time.time - lastUsedTime);
+    }
+
+    public void GiveSupport()
+    {
+        if (!CanGiveSupport())
+        {
+            return;
+        }
+
+        SupportCount++;
+        ScoreBuff += 0.1f;
+        Money -= SupportMoney;
+    }
+
+    public bool CanGiveSupport()
+    {
+        return Money >= SupportMoney;
     }
 }
