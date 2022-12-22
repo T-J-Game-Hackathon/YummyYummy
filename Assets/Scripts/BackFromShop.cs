@@ -5,6 +5,6 @@ public class BackFromShop : MonoBehaviour
 {
     public void OnClick()
     {
-        SceneManager.LoadScene("InGame");
+        gameObject.SetActive(false);
     }
 }

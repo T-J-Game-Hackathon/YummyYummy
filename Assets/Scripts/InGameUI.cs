@@ -38,6 +38,8 @@ public class InGameUI : MonoBehaviour
         UpdateSatisfactionUI(0);
         UpdateHoldingCropSprite(Crop.Potato);
         UpdateItemSprite(Item.None);
+
+        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
