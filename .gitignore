@@ -77,6 +77,9 @@ crashlytics-build.properties
 
 *.DS_Store
 
+# Images
+/[Aa]ssets/[Ii]mages/**/*.png
+
 # ストア由来のアセット
 /[Aa]ssets/RPG\ Tiny\ Hero\ Duo
 /[Aa]ssets/RPG\ Tiny\ Hero\ Duo.meta
