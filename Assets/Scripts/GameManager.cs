@@ -20,6 +20,15 @@ public class GameManager : MonoBehaviour
     private GameObject MenuUIPrefab;
     private GameObject MenuUIInstance;
 
+    [SerializeField]
+    public static float GetSupportCoolTime = 5.0f;
+    private float lastUsedTime;
+    public static float ScoreBuff = 1f;
+    public static int SupportCount = 0;
+
+    [SerializeField]
+    public int SupportMoney = 2000;
+
     public GameObject InGameUICanvasObject;
     private InGameUI InGameUIInstance;
 
@@ -70,6 +79,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void FixedUpdate()
+    {
+        ElapsedTime += Time.fixedDeltaTime;
+        if (ElapsedTime >= TimeLimit)
+        {
+            // Game Over
+        }
+    }
+
     public void IncrementScore(Crop crop)
     {
         Debug.Log("IncrementScore has called!");
@@ -98,26 +116,55 @@ public class GameManager : MonoBehaviour
         switch (crop)
         {
             case Crop.Potato:
-                Score += 10;
+                Money += 10;
                 break;
             case Crop.Spinach:
-                Score += 30;
+                Money += 30;
                 break;
             case Crop.Tomato:
-                Score += 50;
+                Money += 50;
                 break;
             default:
                 break;
         }
-
-        InGameUIInstance.UpdateMoneyUI(Money);
-        UpdateSatisfaction();
     }
 
-    private void UpdateSatisfaction()
+    public void GetSuppport(int money)
     {
-        float targetScore = 5000; // 100%満足度(お腹が空いている人の割合)と見做されるスコア
-        RateOfFull = Score / targetScore;
-        InGameUIInstance.UpdateSatisfactionUI(RateOfFull);
+        if (!CanGetSupport())
+        {
+            return;
+        }
+
+        lastUsedTime = Time.time;
+
+        Money += money;
+    }
+
+    public bool CanGetSupport()
+    {
+        return Time.time - lastUsedTime >= GetSupportCoolTime;
+    }
+
+    public float RemainingCoolTime()
+    {
+        return GetSupportCoolTime - (Time.time - lastUsedTime);
+    }
+
+    public void GiveSupport()
+    {
+        if (!CanGiveSupport())
+        {
+            return;
+        }
+
+        SupportCount++;
+        ScoreBuff += 0.1f;
+        Money -= SupportMoney;
+    }
+
+    public bool CanGiveSupport()
+    {
+        return Money >= SupportMoney;
     }
 }
