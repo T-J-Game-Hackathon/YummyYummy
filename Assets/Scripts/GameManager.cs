@@ -3,16 +3,16 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField]
-    private static int Score;
+    public static int Score;
 
     [SerializeField]
-    private static int Money;
+    public static int Money;
     private static float TimeLimit; //Second
-    private static float RateOfFull;
+    public static float RateOfFull;
     private static float ElapsedTime;
 
     [SerializeField]
-    private GameObject MenuUIPrefab;
+    public GameObject MenuUIPrefab;
     private GameObject MenuUIInstance;
 
     [SerializeField]
@@ -36,8 +36,11 @@ public class GameManager : MonoBehaviour
 
         RateOfFull = 0;
         ElapsedTime = 0;
+
         // 常時表示UIのCanvasについているインスタンス`InGameUI`を取得
         InGameUIInstance = InGameUICanvasObject.GetComponent<InGameUI>();
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void TimeSwtiching(int mode)
@@ -129,33 +132,24 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
-        if (InGameUIInstance != null)
-        {
-            InGameUIInstance.UpdateMoneyUI(Money);
-        }
+        InGameUIInstance?.UpdateMoneyUI(Money);
     }
 
     void UpdateSatisfactionUI()
     {
         float targetScore = 5000;
         RateOfFull = Score / targetScore;
-        if (InGameUIInstance != null)
-        {
-            InGameUIInstance.UpdateSatisfactionUI(RateOfFull);
-        }
+        InGameUIInstance?.UpdateSatisfactionUI(RateOfFull);
     }
 
-    private float getRemainingTime()
+    private float GetRemainingTime()
     {
         return TimeLimit - ElapsedTime;
     }
 
     void UpdateRemainingTimeUI()
     {
-        if (InGameUIInstance != null)
-        {
-            InGameUIInstance.UpdateRemainingTimeUI(Mathf.Max(0, getRemainingTime()));
-        }
+        InGameUIInstance?.UpdateRemainingTimeUI(Mathf.Max(0, GetRemainingTime()));
     }
 
     public void GetSuppport(int money)
