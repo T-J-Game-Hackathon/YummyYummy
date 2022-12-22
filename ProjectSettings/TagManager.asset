@@ -5,11 +5,13 @@ TagManager:
   serializedVersion: 2
   tags:
   - Crop
+  - Stage
+  - Ground
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Environment
   - Water
   - UI
   - 

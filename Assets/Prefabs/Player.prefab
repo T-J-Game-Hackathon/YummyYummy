@@ -2365,7 +2365,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &7014400832869283482
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2407,6 +2407,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 150
   turnSpeed: 10
+  holdingCrop: 0
+  jumpForce: 6.5
+  item: 0
 --- !u!1 &8113429259623324745
 GameObject:
   m_ObjectHideFlags: 0

@@ -77,6 +77,17 @@ crashlytics-build.properties
 
 *.DS_Store
 
+# Images
+/[Aa]ssets/[Ii]mages/**/*.png
+
 # ストア由来のアセット
 /[Aa]ssets/RPG\ Tiny\ Hero\ Duo
+/[Aa]ssets/RPG\ Tiny\ Hero\ Duo.meta
 /[Aa]ssets/Wispy\ Sky
+/[Aa]ssets/Wispy\ Sky.meta
+/[Aa]ssets/Polytope\ Studio
+/[Aa]ssets/Polytope\ Studio.meta
+/[Aa]ssets/MaximeBrunoni
+/[Aa]ssets/MaximeBrunoni.meta
+/[Aa]ssets/Fantasy_Kingdom_Pack_Lite
+/[Aa]ssets/Fantasy_Kingdom_Pack_Lite.meta
