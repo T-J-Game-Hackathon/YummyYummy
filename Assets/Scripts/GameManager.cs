@@ -15,13 +15,29 @@ public class GameManager : MonoBehaviour
     private GameObject MenuUIPrefab;
     private GameObject MenuUIInstance;
 
+    [SerializeField]
+    public static float GetSupportCoolTime = 5.0f;
+    private float lastUsedTime;
+    public static float ScoreBuff = 1f;
+    public static int SupportCount = 0;
+
+    [SerializeField]
+    public int SupportMoney = 2000;
+
+    public GameObject InGameUICanvasObject;
+    private InGameUI InGameUIInstance;
+
     public void Start()
     {
         Score = 0;
         Money = 0;
-        TimeLimit = 180.0f;
+        // TimeLimit = 180.0f;
+        TimeLimit = 70.0f;
+
         RateOfFull = 0;
         ElapsedTime = 0;
+        // 常時表示UIのCanvasについているインスタンス`InGameUI`を取得
+        InGameUIInstance = InGameUICanvasObject.GetComponent<InGameUI>();
     }
 
     public void TimeSwtiching(int mode)
@@ -60,8 +76,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void FixedUpdate()
+    {
+        ElapsedTime += Time.fixedDeltaTime;
+        UpdateRemainingTimeUI();
+        if (ElapsedTime >= TimeLimit)
+        {
+            // Game Over
+        }
+    }
+
     public void IncrementScore(Crop crop)
     {
+        Debug.Log("IncrementScore has called!");
         switch (crop)
         {
             case Crop.Potato:
@@ -75,24 +102,98 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 break;
+        }
+
+        if (InGameUIInstance != null)
+        {
+            InGameUIInstance.UpdateScoreUI(Score);
+            UpdateSatisfactionUI();
         }
     }
 
     public void IncrementMoney(Crop crop)
     {
+        Debug.Log("IncrementMoney has called!");
+
         switch (crop)
         {
             case Crop.Potato:
-                Score += 10;
+                Money += 10;
                 break;
             case Crop.Spinach:
-                Score += 30;
+                Money += 30;
                 break;
             case Crop.Tomato:
-                Score += 50;
+                Money += 50;
                 break;
             default:
                 break;
         }
+        if (InGameUIInstance != null)
+        {
+            InGameUIInstance.UpdateMoneyUI(Money);
+        }
+    }
+
+    void UpdateSatisfactionUI()
+    {
+        float targetScore = 5000;
+        RateOfFull = Score / targetScore;
+        if (InGameUIInstance != null)
+        {
+            InGameUIInstance.UpdateSatisfactionUI(RateOfFull);
+        }
+    }
+
+    private float getRemainingTime()
+    {
+        return TimeLimit - ElapsedTime;
+    }
+
+    void UpdateRemainingTimeUI()
+    {
+        if (InGameUIInstance != null)
+        {
+            InGameUIInstance.UpdateRemainingTimeUI(Mathf.Max(0, getRemainingTime()));
+        }
+    }
+
+    public void GetSuppport(int money)
+    {
+        if (!CanGetSupport())
+        {
+            return;
+        }
+
+        lastUsedTime = Time.time;
+
+        Money += money;
+    }
+
+    public bool CanGetSupport()
+    {
+        return Time.time - lastUsedTime >= GetSupportCoolTime;
+    }
+
+    public float RemainingCoolTime()
+    {
+        return GetSupportCoolTime - (Time.time - lastUsedTime);
+    }
+
+    public void GiveSupport()
+    {
+        if (!CanGiveSupport())
+        {
+            return;
+        }
+
+        SupportCount++;
+        ScoreBuff += 0.1f;
+        Money -= SupportMoney;
+    }
+
+    public bool CanGiveSupport()
+    {
+        return Money >= SupportMoney;
     }
 }

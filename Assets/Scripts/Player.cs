@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     public float jumpForce = 6.5f;
 
+    [SerializeField]
+    public Item item = Item.None;
+
     private Animator animator;
     private Rigidbody rb;
     private bool canJump = true;
@@ -80,11 +83,13 @@ public class Player : MonoBehaviour
             var arableLand = obj.GetComponent<ArableLand>();
             if (arableLand.isHarvestable)
             {
+                ExpandColider();
                 arableLand.Harvest();
                 animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
             }
-            else if (!arableLand.hasPlanted)
+            if (!arableLand.hasPlanted)
             {
+                ExpandColider();
                 arableLand.Plant(holdingCrop);
                 animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
             }
@@ -95,6 +100,7 @@ public class Player : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Crop"))
         {
+            ResetColider();
             animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), false);
         }
     }
@@ -103,8 +109,35 @@ public class Player : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            // 地面と接触したら、ジャンプできるようにする
             canJump = true;
         }
+    }
+
+    public void ExpandColider()
+    {
+        var col = GetComponent<CapsuleCollider>();
+        switch (item)
+        {
+            case Item.hoe1:
+                col.radius = 2f;
+                break;
+            case Item.hoe2:
+                col.radius = 4f;
+                break;
+            case Item.hoe3:
+                col.radius = 6f;
+                break;
+            case Item.None:
+                break;
+            default:
+                Debug.Log("Error: Player.cs: ExpandColider(): item is not defined");
+                break;
+        }
+    }
+
+    public void ResetColider()
+    {
+        var col = GetComponent<CapsuleCollider>();
+        col.radius = 0.4f;
     }
 }
