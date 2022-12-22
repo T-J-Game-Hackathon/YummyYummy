@@ -9,13 +9,14 @@ public class Player : MonoBehaviour
     public float turnSpeed = 10f;
 
     [SerializeField]
-    private Animator animator;
-
-    [SerializeField]
-    private Rigidbody rb;
-
-    [SerializeField]
     public Crop holdingCrop;
+
+    [SerializeField]
+    public float jumpForce = 6.5f;
+
+    private Animator animator;
+    private Rigidbody rb;
+    private bool canJump = true;
 
     public void Start()
     {
@@ -37,6 +38,12 @@ public class Player : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             holdingCrop = Crop.Tomato;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && canJump)
+        {
+            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            canJump = false;
         }
     }
 
@@ -89,6 +96,15 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Crop"))
         {
             animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), false);
+        }
+    }
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            // 地面と接触したら、ジャンプできるようにする
+            canJump = true;
         }
     }
 }

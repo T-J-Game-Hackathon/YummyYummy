@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Crop
   - Stage
+  - Ground
   layers:
   - Default
   - TransparentFX
