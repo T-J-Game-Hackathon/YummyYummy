@@ -81,7 +81,7 @@ SpriteRenderer:
   m_Size: {x: 4.215, y: 2.665}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!1 &7066861150861058063
@@ -131,13 +131,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteObject: {fileID: 7066861150845470022}
-  phase1Sprite: {fileID: 21300000, guid: 2d04e3aad7673604ba6b85c1312bcae7, type: 3}
-  phase2PotatoSprite: {fileID: 21300000, guid: 733fada5b249c684b95e4e78806b2471, type: 3}
-  phase3PotatoSprite: {fileID: 21300000, guid: e08a498c3eab7134fa8fbae642e58640, type: 3}
-  phase2SpinachSprite: {fileID: 21300000, guid: 4982a8d3082b9044ba8d7ad76802ef9b, type: 3}
-  phase3SpinachSprite: {fileID: 21300000, guid: ad7b1d5f2a328154ab3d3b1565bb4e94, type: 3}
-  phase2TomatoSprite: {fileID: 21300000, guid: a3a4db53eb6df2243b841ac95e86d9a2, type: 3}
-  phase3TomatoSprite: {fileID: 21300000, guid: f99a425ccf7c2c842b1436c89e983b2f, type: 3}
+  phase1Sprite: {fileID: 21300000, guid: f0b726697e46d477482dbbe5acf54020, type: 3}
+  phase2PotatoSprite: {fileID: 21300000, guid: 6713eed18682e4066bff4fd70a5476c0, type: 3}
+  phase3PotatoSprite: {fileID: 21300000, guid: 987f4ccb276724762873abaa63214def, type: 3}
+  phase2SpinachSprite: {fileID: 21300000, guid: 0c4ddd3380bb145c084af82f4e94e7f3, type: 3}
+  phase3SpinachSprite: {fileID: 21300000, guid: f1e70c168ed65458da94723eb4820f38, type: 3}
+  phase2TomatoSprite: {fileID: 21300000, guid: f302f8fc088604946a228fa0441c8072, type: 3}
+  phase3TomatoSprite: {fileID: 21300000, guid: e360a3ad7dd40488898dba073943fa98, type: 3}
   hasPlanted: 1
   elapsedGrowTime: 0
   growTime: 10
