@@ -2,11 +2,16 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    // [SerializeField]
+    // private static int Score;
+
+    // [SerializeField]
+    // private static int Money;
     [SerializeField]
-    private static int Score;
+    private int Score;
 
     [SerializeField]
-    private static int Money;
+    private int Money;
     private static float TimeLimit; //Second
     private static float RateOfFull;
     private static float ElapsedTime;
@@ -15,6 +20,9 @@ public class GameManager : MonoBehaviour
     private GameObject MenuUIPrefab;
     private GameObject MenuUIInstance;
 
+    public GameObject InGameUICanvasObject;
+    private InGameUI InGameUIInstance;
+
     public void Start()
     {
         Score = 0;
@@ -22,6 +30,8 @@ public class GameManager : MonoBehaviour
         TimeLimit = 180.0f;
         RateOfFull = 0;
         ElapsedTime = 0;
+        // 常時表示UIのCanvasについているインスタンス`InGameUI`を取得
+        InGameUIInstance = InGameUICanvasObject.GetComponent<InGameUI>();
     }
 
     public void TimeSwtiching(int mode)
@@ -62,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     public void IncrementScore(Crop crop)
     {
+        Debug.Log("IncrementScore has called!");
         switch (crop)
         {
             case Crop.Potato:
@@ -76,10 +87,14 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+
+        InGameUIInstance.UpdateScoreUI(Score);
     }
 
     public void IncrementMoney(Crop crop)
     {
+        Debug.Log("IncrementMoney has called!");
+
         switch (crop)
         {
             case Crop.Potato:
@@ -94,5 +109,15 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+
+        InGameUIInstance.UpdateMoneyUI(Money);
+        UpdateSatisfaction();
+    }
+
+    private void UpdateSatisfaction()
+    {
+        float targetScore = 5000; // 100%満足度(お腹が空いている人の割合)と見做されるスコア
+        RateOfFull = Score / targetScore;
+        InGameUIInstance.UpdateSatisfactionUI(RateOfFull);
     }
 }

@@ -155,6 +155,7 @@ public class ArableLand : MonoBehaviour
             GameManager gameManager = gameControllerObject.GetComponent<GameManager>();
             // Add money
             gameManager.IncrementMoney(plantedCrop);
+            gameManager.IncrementScore(plantedCrop);
 
             hasPlanted = false;
             isHarvestable = false;
