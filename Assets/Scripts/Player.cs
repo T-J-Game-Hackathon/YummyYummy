@@ -93,8 +93,6 @@ public class Player : MonoBehaviour
                 arableLand.Plant(holdingCrop);
                 animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), true);
             }
-
-            animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), false);
         }
     }
 
@@ -103,6 +101,7 @@ public class Player : MonoBehaviour
         if (other.gameObject.CompareTag("Crop"))
         {
             ResetColider();
+            animator.SetBool(PlayerAnimState.isHarvestAndPlant.ToString(), false);
         }
     }
 
