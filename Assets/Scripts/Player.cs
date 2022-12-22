@@ -9,13 +9,13 @@ public class Player : MonoBehaviour
     public float turnSpeed = 10f;
 
     [SerializeField]
-    public Crop holdingCrop;
+    public Crop holdingCrop = Crop.Potato;
 
     [SerializeField]
     public float jumpForce = 6.5f;
 
     [SerializeField]
-    public Item item = Item.None;
+    private static Item item = Item.None;
 
     private Animator animator;
     private Rigidbody rb;
@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         holdingCrop = Crop.Potato;
+
+        DontDestroyOnLoad(gameObject);
     }
 
     public void Update()
@@ -139,5 +141,15 @@ public class Player : MonoBehaviour
     {
         var col = GetComponent<CapsuleCollider>();
         col.radius = 0.4f;
+    }
+
+    public static Item GetItem()
+    {
+        return item;
+    }
+
+    public static void SetItem(Item item)
+    {
+        Player.item = item;
     }
 }
