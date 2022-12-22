@@ -15,6 +15,10 @@ public class GameManager : MonoBehaviour
     private GameObject MenuUIPrefab;
     private GameObject MenuUIInstance;
 
+    [SerializeField]
+    public static float GetSupportCoolTime = 5.0f;
+    private float lastUsedTime;
+
     public void Start()
     {
         Score = 0;
@@ -60,6 +64,15 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void FixedUpdate()
+    {
+        ElapsedTime += Time.fixedDeltaTime;
+        if (ElapsedTime >= TimeLimit)
+        {
+            // Game Over
+        }
+    }
+
     public void IncrementScore(Crop crop)
     {
         switch (crop)
@@ -94,5 +107,27 @@ public class GameManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void ReceiveMoney(int money)
+    {
+        if (!CanGetSupport())
+        {
+            return;
+        }
+
+        lastUsedTime = Time.time;
+
+        Money += money;
+    }
+
+    public bool CanGetSupport()
+    {
+        return Time.time - lastUsedTime >= GetSupportCoolTime;
+    }
+
+    public float RemainingCoolTime()
+    {
+        return GetSupportCoolTime - (Time.time - lastUsedTime);
     }
 }
