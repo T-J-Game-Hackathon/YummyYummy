@@ -2409,6 +2409,7 @@ MonoBehaviour:
   turnSpeed: 10
   holdingCrop: 0
   jumpForce: 6.5
+  item: 0
 --- !u!1 &8113429259623324745
 GameObject:
   m_ObjectHideFlags: 0
