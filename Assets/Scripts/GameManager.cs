@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,9 +15,11 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject MenuUIPrefab;
     private GameObject MenuUIInstance;
+    private string SceneName;
 
     public void Start()
     {
+        SceneName = SceneManager.GetActiveScene().name;
         Score = 0;
         Money = 0;
         TimeLimit = 180.0f;
@@ -41,6 +44,9 @@ public class GameManager : MonoBehaviour
 
     public void Update()
     {
+        if(Equals(SceneName,"Return")){
+            return;
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (MenuUIInstance == null)
@@ -93,6 +99,16 @@ public class GameManager : MonoBehaviour
                 break;
             default:
                 break;
+        }
+    }
+
+    public float Show(string name){
+        switch(name){
+            case "Score":
+                return (float)Score;
+            case "Full":
+                return RateOfFull;
+            default: return 0f;
         }
     }
 }
