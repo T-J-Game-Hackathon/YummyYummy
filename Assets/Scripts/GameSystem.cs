@@ -16,4 +16,8 @@ public class GameSystem : MonoBehaviour
         Application.Quit();
 #endif
     }
+    public void BackToTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
 }
