@@ -2827,7 +2827,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   infomation: {fileID: 830054313}
-  text: {fileID: 1798172391}
 --- !u!4 &830054315
 Transform:
   m_ObjectHideFlags: 0
