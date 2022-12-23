@@ -498,13 +498,14 @@ GameObject:
   - component: {fileID: 2741197971898735825}
   - component: {fileID: 2741197971898735824}
   - component: {fileID: 2741197971898735831}
+  - component: {fileID: 1961663001}
   m_Layer: 5
   m_Name: ShopCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2741197971898735826
 RectTransform:
   m_ObjectHideFlags: 0
@@ -540,7 +541,7 @@ Canvas:
   m_GameObject: {fileID: 2741197971898735830}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
+  m_RenderMode: 0
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 1
@@ -550,7 +551,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &2741197971898735824
 MonoBehaviour:
@@ -592,6 +593,18 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &1961663001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2741197971898735830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7ff799259995a446a22e9a20e5c72c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2741197971908617890
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,7 +1886,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2741197972733866971}
+      - m_Target: {fileID: 1961663001}
         m_TargetAssemblyTypeName: BackFromShop, Assembly-CSharp
         m_MethodName: OnClick
         m_Mode: 1

@@ -12,8 +12,8 @@ public class GoldHoeButton : MonoBehaviour
             {
                 Player.SetItem(Item.hoe3);
             }
-        }
 
-        gameObject.GetComponent<Button>().interactable = false;
+            gameObject.GetComponent<Button>().interactable = false;
+        }
     }
 }

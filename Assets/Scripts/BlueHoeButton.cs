@@ -12,8 +12,8 @@ public class BlueHoeButton : MonoBehaviour
             {
                 Player.SetItem(Item.hoe2);
             }
-        }
 
-        gameObject.GetComponent<Button>().interactable = false;
+            gameObject.GetComponent<Button>().interactable = false;
+        }
     }
 }
