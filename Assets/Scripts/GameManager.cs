@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private GameObject TimeUpPrefab;
     private GameObject TimeUp;
-
+    
     public void Start()
     {
         SceneName = SceneManager.GetActiveScene().name;
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         InGameUIInstance = InGameUICanvasObject.GetComponent<InGameUI>();
-
+        
         DontDestroyOnLoad(gameObject);
     }
 
@@ -186,7 +186,7 @@ public class GameManager : MonoBehaviour
 
         Money += money;
     }
-
+    
     public bool CanGetSupport()
     {
         return Time.time - lastUsedTime >= GetSupportCoolTime;
